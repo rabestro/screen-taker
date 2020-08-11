@@ -18,17 +18,15 @@ public final class ScreenTaker extends Thread {
                 .build();
 
         client = new DbxClientV2(requestConfig, appConfig.getToken());
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        rectangle = new Rectangle(screenSize);
+        rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
     }
 
     @Override
     public void run() {
         while (true) {
             try {
-                final var robot = new Robot();
-                final var image = robot.createScreenCapture(rectangle);
-                log.finer(()->"Screenshot taken at " + LocalDateTime.now());
+                final var image = new Robot().createScreenCapture(rectangle);
+                log.fine(()->"Screenshot taken at " + LocalDateTime.now());
                 log.finest(() -> image.getWidth() + "x" + image.getHeight());
                 new Uploader(client, image).start();
 
@@ -39,5 +37,4 @@ public final class ScreenTaker extends Thread {
             }
         }
     }
-
 }
