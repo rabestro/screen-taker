@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 public final class Uploader extends Thread {
     private static final Logger log = Logger.getLogger(Uploader.class.getName());
+    @SuppressWarnings("SpellCheckingInspection")
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
     private static final String IMAGE_TYPE = "png";
 
