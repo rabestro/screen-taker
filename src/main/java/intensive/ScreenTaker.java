@@ -30,6 +30,7 @@ public final class ScreenTaker extends Thread {
                 log.finest(() -> image.getWidth() + "x" + image.getHeight());
                 new Uploader(client, image).start();
 
+                //noinspection BusyWait
                 sleep(5000);
             } catch (InterruptedException | AWTException e) {
                 e.printStackTrace();
