@@ -26,7 +26,10 @@ public final class AppConfig {
     }
 
     public String getClientIdentifier() {
-        return properties.getProperty("identifier") + "/" + properties.getProperty("version");
+        return properties.getProperty("identifier", "IntensiveSpy") + "/" + properties.getProperty("version");
     }
 
+    public long getInterval() {
+        return Long.parseLong(properties.getProperty("interval", "5000"));
+    }
 }
