@@ -1,5 +1,8 @@
-# intensive-spy-2020-08-10
-The homework for an intensve java webinar. 
+# Java Intensive Webinar (2020-08-10)
+
+A multithread program that takes desctop screenshots in background and send them to the dropbox server.
+
+## Program of webinar
 
 - Exception Handling.
 - Threads and Processes.
