@@ -34,13 +34,12 @@ public final class ScreenTaker extends Thread {
                 log.fine(() -> "Screenshot taken at " + LocalDateTime.now());
                 log.finest(() -> "Screenshot size is " + image.getWidth() + "x" + image.getHeight());
 
-                final var outputStream = new ByteArrayOutputStream();
-                ImageIO.write(image, config.getImageType(), outputStream);
-                final var inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-                final var fileName = config.getFileNameNow();
-
                 new Thread(() -> {
                     try {
+                        final var outputStream = new ByteArrayOutputStream();
+                        ImageIO.write(image, config.getImageType(), outputStream);
+                        final var inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+                        final var fileName = config.getFileNameNow();
                         log.fine(() -> "Uploading image: " + fileName);
                         client.files().uploadBuilder(fileName).uploadAndFinish(inputStream);
                         log.fine(() -> fileName + " was successfully uploaded.");
@@ -48,10 +47,11 @@ public final class ScreenTaker extends Thread {
                         e.printStackTrace();
                     }
                 }).start();
+
                 //noinspection BusyWait
                 sleep(config.getInterval());
             }
-        } catch (InterruptedException | AWTException | IOException e) {
+        } catch (InterruptedException | AWTException e) {
             e.printStackTrace();
         }
     }
