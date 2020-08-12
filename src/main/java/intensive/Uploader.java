@@ -35,9 +35,7 @@ public final class Uploader extends Thread {
             final var outputStream = new ByteArrayOutputStream();
             ImageIO.write(image, IMAGE_TYPE, outputStream);
             final var inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-            client.files()
-                    .uploadBuilder(fileName)
-                    .uploadAndFinish(inputStream);
+            client.files().uploadBuilder(fileName).uploadAndFinish(inputStream);
             log.fine(() -> fileName + " was successfully uploaded.");
         } catch (IOException | DbxException e) {
             e.printStackTrace();

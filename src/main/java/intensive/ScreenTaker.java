@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 
 public final class ScreenTaker extends Thread {
     private static final Logger log = Logger.getLogger(ScreenTaker.class.getName());
-    private final Rectangle rectangle;
     private final DbxClientV2 client;
     private final long interval;
 
@@ -19,14 +18,17 @@ public final class ScreenTaker extends Thread {
                 .newBuilder(appConfig.getClientIdentifier())
                 .build();
         client = new DbxClientV2(requestConfig, appConfig.getToken());
-        rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
     }
 
     @Override
     public void run() {
-        while (true) {
-            try {
-                final var image = new Robot().createScreenCapture(rectangle);
+        try {
+            final var robot = new Robot();
+            final var rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+
+            //noinspection InfiniteLoopStatement
+            while (true) {
+                final var image = robot.createScreenCapture(rectangle);
                 log.fine(() -> "Screenshot taken at " + LocalDateTime.now());
                 log.finest(() -> "Screenshot size is " + image.getWidth() + "x" + image.getHeight());
 
@@ -34,10 +36,10 @@ public final class ScreenTaker extends Thread {
 
                 //noinspection BusyWait
                 sleep(interval);
-            } catch (InterruptedException | AWTException e) {
-                e.printStackTrace();
-                break;
             }
+        } catch (InterruptedException | AWTException e) {
+            e.printStackTrace();
         }
     }
+
 }
