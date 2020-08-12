@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: intensive.Main
-Class-Path: dropbox-core-sdk-3.1.4.jar jackson-core-2.7.4.jar
-
