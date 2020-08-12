@@ -11,12 +11,13 @@ public final class ScreenTaker extends Thread {
     private static final Logger log = Logger.getLogger(ScreenTaker.class.getName());
     private final Rectangle rectangle;
     private final DbxClientV2 client;
+    private final long interval;
 
     ScreenTaker(final AppConfig appConfig) {
+        interval = appConfig.getInterval();
         final var requestConfig = DbxRequestConfig
                 .newBuilder(appConfig.getClientIdentifier())
                 .build();
-
         client = new DbxClientV2(requestConfig, appConfig.getToken());
         rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
     }
@@ -26,12 +27,13 @@ public final class ScreenTaker extends Thread {
         while (true) {
             try {
                 final var image = new Robot().createScreenCapture(rectangle);
-                log.fine(()->"Screenshot taken at " + LocalDateTime.now());
-                log.finest(() -> image.getWidth() + "x" + image.getHeight());
+                log.fine(() -> "Screenshot taken at " + LocalDateTime.now());
+                log.finest(() -> "Screenshot size is " + image.getWidth() + "x" + image.getHeight());
+
                 new Uploader(client, image).start();
 
                 //noinspection BusyWait
-                sleep(5000);
+                sleep(interval);
             } catch (InterruptedException | AWTException e) {
                 e.printStackTrace();
                 break;
