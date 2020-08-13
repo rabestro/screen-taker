@@ -12,4 +12,4 @@ A multithread program that takes desctop screenshots in background and send them
 
 ### Homework task
 - The program should start a thread that takes a screenshot every 5 seconds
-- After obtaining the screenshot a new separate Thread should upload the screenshot to the DropBox server.
+- After obtaining the screenshot a new separate thread should upload the screenshot to the DropBox server.
