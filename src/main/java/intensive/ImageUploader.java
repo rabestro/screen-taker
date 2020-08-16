@@ -11,8 +11,8 @@ import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
-public class ImageUploader implements Runnable {
-    private static final Logger log = Logger.getLogger(ScreenTaker.class.getName());
+public final class ImageUploader implements Runnable {
+    private static final Logger log = Logger.getLogger(ImageUploader.class.getName());
 
     private final AppConfig config;
     private final BufferedImage image;
@@ -31,14 +31,14 @@ public class ImageUploader implements Runnable {
             config.getClient()
                     .files()
                     .uploadBuilder(fileName)
-                    .uploadAndFinish(imageToInputStream(image));
+                    .uploadAndFinish(toInputStream(image));
             log.fine(() -> fileName + " was successfully uploaded.");
         } catch (DbxException | IOException e) {
             e.printStackTrace();
         }
     }
 
-    private InputStream imageToInputStream(BufferedImage image) throws IOException {
+    private InputStream toInputStream(final BufferedImage image) throws IOException {
         final var outputStream = new ByteArrayOutputStream();
         ImageIO.write(image, config.getImageType(), outputStream);
         return new ByteArrayInputStream(outputStream.toByteArray());
