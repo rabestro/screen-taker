@@ -1,5 +1,8 @@
 package intensive;
 
+import com.dropbox.core.DbxRequestConfig;
+import com.dropbox.core.v2.DbxClientV2;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,18 +12,18 @@ import static java.util.Objects.requireNonNull;
 
 public final class AppConfig {
     private final Properties properties;
+    private final DbxClientV2 client;
 
-    AppConfig() {
+    AppConfig(final String fileName) throws IOException {
         properties = new Properties();
-    }
-
-    public AppConfig load(final String fileName) throws IOException {
         final var inputStream = requireNonNull(
                 getClass().getClassLoader().getResourceAsStream(fileName),
                 "property file '" + fileName + "' not found in the classpath");
 
         properties.load(inputStream);
-        return this;
+
+        final var requestConfig = DbxRequestConfig.newBuilder(getClientIdentifier()).build();
+        this.client = new DbxClientV2(requestConfig, getToken());
     }
 
     public String getToken() {
@@ -45,5 +48,9 @@ public final class AppConfig {
 
     public String getFileNameNow() {
         return "/" + LocalDateTime.now().format(getFormatter()) + "." + getImageType();
+    }
+
+    public DbxClientV2 getClient() {
+        return client;
     }
 }
