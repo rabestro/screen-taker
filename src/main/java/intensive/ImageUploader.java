@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
 public class ImageUploader implements Runnable {
@@ -20,7 +21,7 @@ public class ImageUploader implements Runnable {
     public ImageUploader(AppConfig config, BufferedImage image) {
         this.config = config;
         this.image = image;
-        this.fileName = config.getFileNameNow();
+        this.fileName = "/" + LocalDateTime.now().format(config.getFormatter()) + "." + config.getImageType();
     }
 
     @Override

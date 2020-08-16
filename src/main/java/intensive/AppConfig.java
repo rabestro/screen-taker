@@ -4,7 +4,6 @@ import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
@@ -44,10 +43,6 @@ public final class AppConfig {
 
     public String getImageType() {
         return properties.getProperty("image_type", "png");
-    }
-
-    public String getFileNameNow() {
-        return "/" + LocalDateTime.now().format(getFormatter()) + "." + getImageType();
     }
 
     public DbxClientV2 getClient() {

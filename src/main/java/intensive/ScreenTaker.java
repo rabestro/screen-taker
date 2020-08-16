@@ -1,14 +1,6 @@
 package intensive;
 
-import com.dropbox.core.DbxException;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -40,7 +32,6 @@ public final class ScreenTaker extends Thread {
     private void takeScreenshot() {
         final var image = robot.createScreenCapture(rectangle);
         log.fine(() -> "Screenshot taken at " + LocalDateTime.now());
-        log.finest(() -> "Screenshot size is " + image.getWidth() + "x" + image.getHeight());
 
         uploader.submit(new ImageUploader(config, image));
     }
