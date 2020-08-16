@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Intensive20200810.main:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Intensive20200810_main_jar</output-path>
+    <root id="archive" name="Intensive20200810.main.jar">
+      <element id="module-output" name="Intensive20200810.main" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.dropbox.core/dropbox-core-sdk/3.1.4/57eb0494c321cc148b85c8f468cd0b86e95e583/dropbox-core-sdk-3.1.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.7.4/b8f38a249116b66d804a5ca2b14a3459b7913a94/jackson-core-2.7.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

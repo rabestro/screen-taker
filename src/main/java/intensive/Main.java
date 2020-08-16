@@ -1,5 +1,6 @@
 package intensive;
 
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.logging.LogManager;
@@ -14,11 +15,11 @@ public final class Main {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, AWTException {
 
         new ScreenTaker(
-                new AppConfig()
-                        .load("app.properties")
+                new Robot(),
+                new AppConfig().load("app.properties")
         ).start();
 
     }
