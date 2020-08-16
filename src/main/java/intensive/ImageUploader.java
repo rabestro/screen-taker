@@ -18,7 +18,7 @@ public final class ImageUploader implements Runnable {
     private final BufferedImage image;
     private final String fileName;
 
-    public ImageUploader(AppConfig config, BufferedImage image) {
+    public ImageUploader(final AppConfig config, final BufferedImage image) {
         this.config = config;
         this.image = image;
         this.fileName = "/" + LocalDateTime.now().format(config.getFormatter()) + "." + config.getImageType();
