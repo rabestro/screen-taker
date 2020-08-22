@@ -32,7 +32,7 @@ public final class ImageUploader implements Runnable {
                     .files()
                     .uploadBuilder(fileName)
                     .uploadAndFinish(toInputStream(image));
-            log.fine(() -> fileName + " was successfully uploaded.");
+            log.info(() -> fileName + " was successfully uploaded.");
         } catch (DbxException | IOException e) {
             log.warning(e::getMessage);
         }
