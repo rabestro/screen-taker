@@ -18,6 +18,17 @@ A multithread program that takes desktop screenshots in background and send them
 
 ### Installation
 - Obtain your own DropBox Access Token
-- Rename app-examples.properties to app.properties
-- Copy your token to app.properties file
+- Copy your token to `screentaker.properties` file
 - Tune any other properties like interval (in milliseconds), formatter or image type
+- Tune logging properties in `logging.properties` file. 
+
+### Run the program
+
+Open the terminal and type a command:
+```
+java -jar ScreenTaker-1.1.0.jar 
+``` 
+If you prefer to run the program in the background (linux) add an ampersand in the end:
+```
+java -jar ScreenTaker-1.1.0.jar &
+```

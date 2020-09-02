@@ -40,7 +40,7 @@ public final class Main {
 
         new ScreenTaker(
                 new Robot(),
-                new AppConfig("app.properties")
+                new AppConfig()
         ).start();
 
     }

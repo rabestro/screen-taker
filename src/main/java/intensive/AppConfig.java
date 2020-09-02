@@ -3,30 +3,22 @@ package intensive;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
-import static java.util.Objects.requireNonNull;
-
 public final class AppConfig {
-    private final Properties properties;
+    private static final String SCREEN_TAKER_PROPERTIES = "screentaker.properties";
+    private final Properties properties = new Properties();
     private final DbxClientV2 client;
 
-    AppConfig(final String fileName) throws IOException {
-        properties = new Properties();
-        final var inputStream = requireNonNull(
-                getClass().getClassLoader().getResourceAsStream(fileName),
-                "property file '" + fileName + "' not found in the classpath");
-
+    public AppConfig() throws IOException {
+        final var inputStream = new FileInputStream(SCREEN_TAKER_PROPERTIES);
         properties.load(inputStream);
-
         final var requestConfig = DbxRequestConfig.newBuilder(getClientIdentifier()).build();
-        this.client = new DbxClientV2(requestConfig, getToken());
-    }
-
-    public String getToken() {
-        return properties.getProperty("token");
+        this.client = new DbxClientV2(requestConfig, properties.getProperty("token"));
+        inputStream.close();
     }
 
     public String getClientIdentifier() {
