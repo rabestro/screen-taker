@@ -20,6 +20,7 @@ public final class ScreenTaker extends Thread {
         this.rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
         final var poolSize = Runtime.getRuntime().availableProcessors();
         this.uploader = Executors.newFixedThreadPool(poolSize);
+        this.setName("Screen Taker");
     }
 
     @Override

@@ -15,3 +15,9 @@ A multithread program that takes desktop screenshots in background and send them
 - After obtaining the screenshot a new separate thread should upload the image to the Dropbox server.
 - The uploading of images have to be in dedicated thread 
 - File names must be in the format <yyyyMMdd_HHmmss>.png
+
+### Installation
+- Obtain your own DropBox Access Token
+- Rename app-examples.properties to app.properties
+- Copy your token to app.properties file
+- Tune any other properties like interval (in milliseconds), formatter or image type
